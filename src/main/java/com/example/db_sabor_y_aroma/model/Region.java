@@ -1,15 +1,14 @@
-package com.saboraroma.model;
+package com.example.db_sabor_y_aroma.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "regiones")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Region {
 
     @Id
@@ -19,4 +18,12 @@ public class Region {
 
     @Column(name = "nombre_region", nullable = false, length = 100)
     private String nombreRegion;
+
+    public Region() {}
+
+    public Integer getIdRegion() { return idRegion; }
+    public void setIdRegion(Integer idRegion) { this.idRegion = idRegion; }
+
+    public String getNombreRegion() { return nombreRegion; }
+    public void setNombreRegion(String nombreRegion) { this.nombreRegion = nombreRegion; }
 }

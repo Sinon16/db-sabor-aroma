@@ -1,5 +1,9 @@
-package com.saboraroma.controller;
+package com.example.db_sabor_y_aroma.controller;
 
+import com.example.db_sabor_y_aroma.model.*;
+import com.example.db_sabor_y_aroma.service.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saboraroma.model.Carrito;
-import com.saboraroma.service.CarritoService;
 
 @RestController
 @RequestMapping("/api/carrito")
@@ -29,7 +31,6 @@ public class CarritoController {
         this.carritoService = carritoService;
     }
 
-    // Obtener carrito por usuario_id (vía param o path variable)
     @GetMapping
     public ResponseEntity<List<Carrito>> obtenerCarritoPorParam(@RequestParam(name = "usuario_id") Integer usuarioId) {
         return ResponseEntity.ok(carritoService.findByUsuario(usuarioId));
@@ -40,20 +41,21 @@ public class CarritoController {
         return ResponseEntity.ok(carritoService.findByUsuario(usuarioId));
     }
 
-    // Agregar producto al carrito
     @PostMapping
-    public ResponseEntity> agregarAlCarrito(@RequestBody Map<String, Integer> body) {
+    public ResponseEntity<?> agregarAlCarrito(@RequestBody Map<String, Integer> body) {
         Integer usuarioId = body.get("usuario_id");
         Integer productoId = body.get("producto_id");
         Integer cantidad = body.getOrDefault("cantidad", 1);
 
         carritoService.addProducto(usuarioId, productoId, cantidad);
-        return ResponseEntity.ok(Map.of("mensaje", "Producto agregado al carrito."));
+
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("mensaje", "Producto agregado al carrito.");
+        return ResponseEntity.ok(respuesta);
     }
 
-    // Actualizar cantidad en el carrito
     @PutMapping("/{id}")
-    public ResponseEntity> actualizarCantidad(
+    public ResponseEntity<?> actualizarCantidad(
             @PathVariable Integer id,
             @RequestBody Map<String, Integer> body) {
         
@@ -61,32 +63,40 @@ public class CarritoController {
         Integer usuarioId = body.get("usuario_id");
 
         return carritoService.updateCantidad(id, usuarioId, cantidad)
-                .map(c -> ResponseEntity.ok(Map.of("mensaje", "Cantidad actualizada correctamente.")))
+                .map(c -> {
+                    Map<String, String> res = new HashMap<>();
+                    res.put("mensaje", "Cantidad actualizada correctamente.");
+                    return ResponseEntity.ok(res);
+                })
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Eliminar ítem del carrito
     @DeleteMapping("/{id}")
-    public ResponseEntity> eliminarItem(
+    public ResponseEntity<?> eliminarItem(
             @PathVariable Integer id,
             @RequestParam(name = "usuario_id", required = false) Integer usuarioId) {
 
         if (carritoService.deleteItem(id, usuarioId)) {
-            return ResponseEntity.ok(Map.of("mensaje", "Producto eliminado del carrito."));
+            Map<String, String> res = new HashMap<>();
+            res.put("mensaje", "Producto eliminado del carrito.");
+            return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }
 
-    // Vaciar carrito
     @DeleteMapping("/vaciar/{usuarioId}")
-    public ResponseEntity> vaciarCarritoPath(@PathVariable Integer usuarioId) {
+    public ResponseEntity<?> vaciarCarritoPath(@PathVariable Integer usuarioId) {
         carritoService.vaciarCarrito(usuarioId);
-        return ResponseEntity.ok(Map.of("mensaje", "Carrito vaciado exitosamente."));
+        Map<String, String> res = new HashMap<>();
+        res.put("mensaje", "Carrito vaciado exitosamente.");
+        return ResponseEntity.ok(res);
     }
 
     @DeleteMapping("/vaciar")
-    public ResponseEntity> vaciarCarritoParam(@RequestParam(name = "usuario_id") Integer usuarioId) {
+    public ResponseEntity<?> vaciarCarritoParam(@RequestParam(name = "usuario_id") Integer usuarioId) {
         carritoService.vaciarCarrito(usuarioId);
-        return ResponseEntity.ok(Map.of("mensaje", "Carrito vaciado exitosamente."));
+        Map<String, String> res = new HashMap<>();
+        res.put("mensaje", "Carrito vaciado exitosamente.");
+        return ResponseEntity.ok(res);
     }
 }

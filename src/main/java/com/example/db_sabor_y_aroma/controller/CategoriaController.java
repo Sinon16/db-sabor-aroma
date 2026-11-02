@@ -1,5 +1,9 @@
-package com.saboraroma.controller;
+package com.example.db_sabor_y_aroma.controller;
 
+import com.example.db_sabor_y_aroma.model.*;
+import com.example.db_sabor_y_aroma.service.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saboraroma.model.Categoria;
-import com.saboraroma.service.CategoriaService;
+
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -42,25 +45,31 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity> crearCategoria(@RequestBody Categoria categoria) {
+    public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria) {
         Categoria nueva = categoriaService.create(categoria);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-            "mensaje", "Categoría creada con éxito",
-            "id", nueva.getIdCategoria()
-        ));
+        Map<String, Object> res = new HashMap<>();
+        res.put("mensaje", "Categoría creada con éxito");
+        res.put("id", nueva.getIdCategoria());
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity> actualizarCategoria(@PathVariable Integer id, @RequestBody Categoria categoria) {
+    public ResponseEntity<?> actualizarCategoria(@PathVariable Integer id, @RequestBody Categoria categoria) {
         return categoriaService.update(id, categoria)
-                .map(c -> ResponseEntity.ok(Map.of("mensaje", "Categoría actualizada correctamente")))
+                .map(c -> {
+                    Map<String, String> res = new HashMap<>();
+                    res.put("mensaje", "Categoría actualizada correctamente");
+                    return ResponseEntity.ok(res);
+                })
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity> eliminarCategoria(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminarCategoria(@PathVariable Integer id) {
         if (categoriaService.delete(id)) {
-            return ResponseEntity.ok(Map.of("mensaje", "Categoría eliminada correctamente"));
+            Map<String, String> res = new HashMap<>();
+            res.put("mensaje", "Categoría eliminada correctamente");
+            return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }

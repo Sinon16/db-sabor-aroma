@@ -1,4 +1,7 @@
-package com.saboraroma.service;
+package com.example.db_sabor_y_aroma.service;
+
+import com.example.db_sabor_y_aroma.model.*;
+import com.example.db_sabor_y_aroma.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.saboraroma.model.Region;
-import com.saboraroma.repository.RegionRepository;
+
 
 @Service
 @Transactional

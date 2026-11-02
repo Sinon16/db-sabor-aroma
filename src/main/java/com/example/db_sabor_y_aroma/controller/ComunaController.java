@@ -1,4 +1,7 @@
-package com.saboraroma.controller;
+package com.example.db_sabor_y_aroma.controller;
+
+import com.example.db_sabor_y_aroma.model.*;
+import com.example.db_sabor_y_aroma.service.*;
 
 import java.util.List;
 
@@ -9,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saboraroma.model.Comuna;
-import com.saboraroma.service.ComunaService;
 
 @RestController
 @RequestMapping("/api/comunas")

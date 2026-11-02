@@ -1,4 +1,7 @@
-package com.saboraroma.service;
+package com.example.db_sabor_y_aroma.service;
+
+import com.example.db_sabor_y_aroma.model.*;
+import com.example.db_sabor_y_aroma.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,13 +9,6 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.saboraroma.model.Carrito;
-import com.saboraroma.model.Producto;
-import com.saboraroma.model.Usuario;
-import com.saboraroma.repository.CarritoRepository;
-import com.saboraroma.repository.ProductoRepository;
-import com.saboraroma.repository.UsuarioRepository;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service

@@ -1,5 +1,6 @@
-package com.saboraroma.controller;
+package com.example.db_sabor_y_aroma.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saboraroma.model.Producto;
-import com.saboraroma.service.ProductoService;
+import com.example.db_sabor_y_aroma.model.Producto;
+import com.example.db_sabor_y_aroma.service.ProductoService;
 
 @RestController
 @RequestMapping("/api")
@@ -29,19 +30,16 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    // Catálogo público
     @GetMapping("/productos")
     public ResponseEntity<List<Producto>> obtenerProductos() {
         return ResponseEntity.ok(productoService.findAll());
     }
 
-    // Listado panel admin (orden descendente por ID)
     @GetMapping("/admin/productos")
     public ResponseEntity<List<Producto>> obtenerProductosAdmin() {
         return ResponseEntity.ok(productoService.findAllAdmin());
     }
 
-    // Detalle de producto
     @GetMapping("/productos/{id}")
     public ResponseEntity<Producto> obtenerProductoPorId(@PathVariable Integer id) {
         return productoService.findById(id)
@@ -49,35 +47,37 @@ public class ProductoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Filtrar por categoría
     @GetMapping("/productos/categoria/{categoria}")
     public ResponseEntity<List<Producto>> obtenerPorCategoria(@PathVariable String categoria) {
         return ResponseEntity.ok(productoService.findByCategoria(categoria));
     }
 
-    // Crear producto
     @PostMapping("/productos")
-    public ResponseEntity> crearProducto(@RequestBody Producto producto) {
+    public ResponseEntity<?> crearProducto(@RequestBody Producto producto) {
         Producto nuevo = productoService.create(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-            "mensaje", "Producto creado con éxito",
-            "id", nuevo.getId()
-        ));
+        Map<String, Object> res = new HashMap<>();
+        res.put("mensaje", "Producto creado con éxito");
+        res.put("id", nuevo.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
-    // Actualizar producto
     @PutMapping("/productos/{id}")
-    public ResponseEntity> actualizarProducto(@PathVariable Integer id, @RequestBody Producto producto) {
+    public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody Producto producto) {
         return productoService.update(id, producto)
-                .map(p -> ResponseEntity.ok(Map.of("mensaje", "Producto actualizado correctamente")))
+                .map(p -> {
+                    Map<String, String> res = new HashMap<>();
+                    res.put("mensaje", "Producto actualizado correctamente");
+                    return ResponseEntity.ok(res);
+                })
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Eliminar producto
     @DeleteMapping("/productos/{id}")
-    public ResponseEntity> eliminarProducto(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id) {
         if (productoService.delete(id)) {
-            return ResponseEntity.ok(Map.of("mensaje", "Producto eliminado correctamente"));
+            Map<String, String> res = new HashMap<>();
+            res.put("mensaje", "Producto eliminado correctamente");
+            return ResponseEntity.ok(res);
         }
         return ResponseEntity.notFound().build();
     }

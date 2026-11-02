@@ -1,15 +1,14 @@
-package com.saboraroma.model;
+package com.example.db_sabor_y_aroma.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "estado_orden")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class EstadoOrden {
 
     @Id
@@ -19,4 +18,12 @@ public class EstadoOrden {
 
     @Column(name = "nombre_estado", nullable = false, length = 50)
     private String nombreEstado;
+
+    public EstadoOrden() {}
+
+    public Integer getIdEstado() { return idEstado; }
+    public void setIdEstado(Integer idEstado) { this.idEstado = idEstado; }
+
+    public String getNombreEstado() { return nombreEstado; }
+    public void setNombreEstado(String nombreEstado) { this.nombreEstado = nombreEstado; }
 }
