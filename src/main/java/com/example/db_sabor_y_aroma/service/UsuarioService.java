@@ -2,7 +2,6 @@ package com.example.db_sabor_y_aroma.service;
 
 import com.example.db_sabor_y_aroma.model.Usuario;
 import com.example.db_sabor_y_aroma.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+
+    UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public List<Usuario> obtenerTodos() {
         return usuarioRepository.findAll();

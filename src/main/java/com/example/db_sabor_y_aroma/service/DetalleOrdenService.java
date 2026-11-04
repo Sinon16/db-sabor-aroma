@@ -2,7 +2,6 @@ package com.example.db_sabor_y_aroma.service;
 
 import com.example.db_sabor_y_aroma.model.DetalleOrden;
 import com.example.db_sabor_y_aroma.repository.DetalleOrdenRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class DetalleOrdenService {
 
-    @Autowired
-    private DetalleOrdenRepository detalleOrdenRepository;
+    private final DetalleOrdenRepository detalleOrdenRepository;
+
+    DetalleOrdenService(DetalleOrdenRepository detalleOrdenRepository) {
+        this.detalleOrdenRepository = detalleOrdenRepository;
+    }
 
     public List<DetalleOrden> obtenerTodos() {
         return detalleOrdenRepository.findAll();

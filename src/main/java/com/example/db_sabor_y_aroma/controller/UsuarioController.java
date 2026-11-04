@@ -4,7 +4,6 @@ import com.example.db_sabor_y_aroma.model.Usuario;
 import com.example.db_sabor_y_aroma.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +15,11 @@ import java.util.List;
 @Tag(name = "Usuario", description = "Gestión de cuentas de usuarios y administradores")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+
+    UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
     @GetMapping
     @Operation(summary = "Listar todos los usuarios registrados")

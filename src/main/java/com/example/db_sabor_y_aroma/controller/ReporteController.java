@@ -6,7 +6,6 @@ import com.example.db_sabor_y_aroma.service.EstadoReporteService;
 import com.example.db_sabor_y_aroma.service.ReporteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +17,14 @@ import java.util.List;
 @Tag(name = "Reporte", description = "Auditoría de reportes y estados de reporte")
 public class ReporteController {
 
-    @Autowired
-    private ReporteService reporteService;
+    private final ReporteService reporteService;
 
-    @Autowired
-    private EstadoReporteService estadoReporteService;
+    private final EstadoReporteService estadoReporteService;
+
+    ReporteController(ReporteService reporteService, EstadoReporteService estadoReporteService) {
+        this.reporteService = reporteService;
+        this.estadoReporteService = estadoReporteService;
+    }
 
     @GetMapping
     @Operation(summary = "Obtener todos los reportes de auditoría")
