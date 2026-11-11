@@ -107,4 +107,16 @@ INSERT INTO reportes (id, tipo_reporte, especialidad, descripcion, fecha, id_est
   (18, 'Producto', 'Eliminar', 'Se eliminó el producto con ID: 30 del catálogo', '2026-10-11 21:08:31', 2),
   (19, 'Categoría', 'Nuevo', 'Se creó la categoría: Vegana', '2026-10-11 21:17:51', 2),
   (20, 'Producto', 'Nuevo', 'Se creó el producto ffw (p212)', '2026-10-11 21:21:02', 2),
-  (21, 'Producto', 'Eliminar', 'Se eliminó el producto con ID: 31 del catálogo', '2026-10-11 21:21:16', 2);
+  (21, 'Producto', 'Eliminar', 'Se eliminó el producto con ID: 31 del catálogo', '2026-10-11 21:21:16', 2),
+  (22, 'Orden', 'Nuevo', 'Se registró una nueva orden (ID 11) por un total de $24.500', '2026-11-01 13:45:00', 2),
+  (23, 'Producto', 'Editar', 'Se actualizó el stock de Lasaña Boloñesa agregando 15 unidades', '2026-11-02 10:15:22', 2),
+  (24, 'Usuario', 'Editar', 'El usuario ID 1 (Admin) actualizó su contraseña de seguridad', '2026-11-03 16:30:10', 2),
+  (25, 'Categoría', 'Nuevo', 'Se creó la categoría: Promociones 2x1', '2026-11-04 09:00:00', 2),
+  (26, 'Producto', 'Nuevo', 'Se creó el producto Frappé Casero Moka (P011)', '2026-11-05 11:20:45', 2),
+  (27, 'Sistema', 'Editar', 'Se actualizó la configuración de CORS permitiendo conexión al puerto 5173', '2026-11-06 08:05:00', 2),
+  (28, 'Orden', 'Editar', 'Se cambió el estado de la Orden #3 a "En Camino"', '2026-11-07 14:10:30', 2),
+  (29, 'Producto', 'Editar', 'Se aplicó descuento del 20% al producto Pizza Pepperoni', '2026-11-08 19:25:00', 2),
+  (30, 'Usuario', 'Eliminar', 'Se eliminó la cuenta del usuario inactivo con ID 5', '2026-11-09 10:45:15', 2),
+  (31, 'Orden', 'Editar', 'Se cambió el estado de la Orden #1 a "Entregado"', '2026-11-10 20:15:00', 2),
+  (32, 'Categoría', 'Editar', 'Se actualizó el nombre de la categoría "Promociones 2x1" a "Cyber Days"', '2026-11-11 09:30:00', 2),
+  (33, 'Producto', 'Eliminar', 'Se eliminó el producto Pizza Rellena (ID 12) por falta de ingredientes', '2026-11-11 10:15:22', 2);

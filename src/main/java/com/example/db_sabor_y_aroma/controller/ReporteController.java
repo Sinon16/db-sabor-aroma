@@ -8,8 +8,19 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.db_sabor_y_aroma.model.ExcelGenerator;
+import com.example.db_sabor_y_aroma.repository.ReporteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/reportes")
@@ -69,4 +80,23 @@ public class ReporteController {
     public EstadoReporte crearEstadoReporte(@RequestBody EstadoReporte estadoReporte) {
         return estadoReporteService.guardar(estadoReporte);
     }
+    @Autowired
+        private ReporteRepository reporteRepository;
+
+        @GetMapping("/exportar")
+        public ResponseEntity<InputStreamResource> exportarReportes(
+                @RequestParam(defaultValue = "Todos") String tipo) throws IOException {
+
+            List<Reporte> registros = reporteRepository.findAll();
+            ByteArrayInputStream in = ExcelGenerator.reportesToExcel(registros, tipo);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; filename=Reporte_General_Registros_" + tipo + ".xlsx");
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                    .body(new InputStreamResource(in));
+        }
+    
 }
