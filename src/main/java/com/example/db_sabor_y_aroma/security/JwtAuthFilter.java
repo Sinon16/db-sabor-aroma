@@ -34,8 +34,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 List<SimpleGrantedAuthority> authorities = Collections.emptyList();
                 if (rol != null) {
-                    String roleName = rol.startsWith("ROLE_") ? rol : "ROLE_" + rol;
-                    authorities = List.of(new SimpleGrantedAuthority(roleName));
+                    // SE ELIMINÓ LA INYECCIÓN DEL PREFIJO "ROLE_"
+                    authorities = List.of(new SimpleGrantedAuthority(rol));
                 }
 
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
