@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/comunas")
-@CrossOrigin(origins = "*")
 public class ComunaController {
 
     private final ComunaService comunaService;

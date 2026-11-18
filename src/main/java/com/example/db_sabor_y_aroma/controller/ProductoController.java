@@ -21,7 +21,6 @@ import com.example.db_sabor_y_aroma.service.ProductoService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
 public class ProductoController {
 
     private final ProductoService productoService;

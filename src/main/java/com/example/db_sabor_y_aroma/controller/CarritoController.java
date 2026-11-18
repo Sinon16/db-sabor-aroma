@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/carrito")
-@CrossOrigin(origins = "*")
 public class CarritoController {
 
     private final CarritoService carritoService;

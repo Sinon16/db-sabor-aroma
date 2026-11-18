@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/regiones")
-@CrossOrigin(origins = "*")
 public class RegionController {
 
     private final RegionService regionService;

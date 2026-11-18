@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/detalle-ordenes")
-@CrossOrigin(origins = "*")
 @Tag(name = "Detalle Orden", description = "Operaciones relacionadas con los detalles de las órdenes")
 public class DetalleOrdenController {
 

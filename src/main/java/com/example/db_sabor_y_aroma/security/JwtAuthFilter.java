@@ -34,8 +34,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 List<SimpleGrantedAuthority> authorities = Collections.emptyList();
                 if (rol != null) {
-                    // SE ELIMINÓ LA INYECCIÓN DEL PREFIJO "ROLE_"
-                    authorities = List.of(new SimpleGrantedAuthority(rol));
+                    String rolLimpio = rol.replace("ROLE_", "");
+                    authorities = List.of(
+                        new SimpleGrantedAuthority(rolLimpio),
+                        new SimpleGrantedAuthority("ROLE_" + rolLimpio)
+                    );
                 }
 
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
@@ -44,6 +47,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
+        System.out.println(">>> PETICION: " + request.getMethod() + " " + request.getRequestURI());
+        System.out.println(">>> HEADER AUTH: " + header);
+        System.out.println(">>> AUTH EN CONTEXTO: " + SecurityContextHolder.getContext().getAuthentication());
         filterChain.doFilter(request, response);
     }
 }

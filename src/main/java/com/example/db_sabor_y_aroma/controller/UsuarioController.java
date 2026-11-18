@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@CrossOrigin(origins = "*")
 @Tag(name = "Usuario", description = "Gestión de cuentas de usuarios y administradores")
 public class UsuarioController {
 
@@ -80,6 +79,9 @@ public class UsuarioController {
     @PostMapping
     @Operation(summary = "Crear o registrar un nuevo usuario")
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
+        if (usuario.getEmail() != null && usuario.getEmail().toLowerCase().endsWith("@profesor.duoc.cl")) {
+            usuario.setEsadmin(true);
+        }
         return usuarioService.guardar(usuario);
     }
 

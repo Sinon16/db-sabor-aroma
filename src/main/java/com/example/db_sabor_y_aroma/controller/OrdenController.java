@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/ordenes")
-@CrossOrigin(origins = "*")
 @Tag(name = "Orden", description = "Gestión de órdenes de compra y sus estados")
 public class OrdenController {
 

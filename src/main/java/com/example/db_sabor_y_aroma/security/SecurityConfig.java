@@ -66,24 +66,24 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/regiones/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/comunas/**").permitAll()
 
-                        // 4. Funciones de Compra del CLIENTE (y ADMIN)
-                        .requestMatchers("/api/carrito/**").hasAnyAuthority("CLIENTE", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/ordenes/**").hasAnyAuthority("CLIENTE", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/detalle-ordenes/**").hasAnyAuthority("CLIENTE", "ADMIN")
+                       // 4. Funciones de Compra del CLIENTE (y ADMIN)
+                        .requestMatchers("/api/carrito", "/api/carrito/**").hasAnyAuthority("CLIENTE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/ordenes", "/api/ordenes/**").hasAnyAuthority("CLIENTE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/detalle-ordenes", "/api/detalle-ordenes/**").hasAnyAuthority("CLIENTE", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/ordenes/usuario/**").hasAnyAuthority("CLIENTE", "ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/reportes/**").hasAnyAuthority("CLIENTE", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/reportes", "/api/reportes/**").hasAnyAuthority("CLIENTE", "ADMIN")
 
                         // 5. Permisos EXCLUSIVOS del ADMINISTRADOR (CRUD completo)
-                        .requestMatchers(HttpMethod.POST, "/api/productos/**", "/api/categorias/**", "/api/ofertas/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/productos/**", "/api/categorias/**", "/api/ofertas/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/productos/**", "/api/categorias/**", "/api/ofertas/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/productos", "/api/productos/**", "/api/categorias", "/api/categorias/**", "/api/ofertas", "/api/ofertas/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/productos", "/api/productos/**", "/api/categorias", "/api/categorias/**", "/api/ofertas", "/api/ofertas/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/productos", "/api/productos/**", "/api/categorias", "/api/categorias/**", "/api/ofertas", "/api/ofertas/**").hasAuthority("ADMIN")
 
                         .requestMatchers(HttpMethod.PUT, "/api/usuarios/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/usuarios/**").hasAuthority("ADMIN")
 
-                        .requestMatchers("/api/ordenes/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/detalle-ordenes/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/reportes/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/ordenes", "/api/ordenes/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/detalle-ordenes", "/api/detalle-ordenes/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/reportes", "/api/reportes/**").hasAuthority("ADMIN")
 
                         // Cualquier otra ruta requiere estar autenticado
                         .anyRequest().authenticated()
