@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @Service
 @Transactional
 public class ProductoService {
@@ -51,11 +50,11 @@ public class ProductoService {
         producto.setId(null);
         Producto creado = productoRepository.save(producto);
 
-        // Registro de historial / reporte
+        // Registro de historial / reporte (sin codigo)
         Reporte reporte = new Reporte();
         reporte.setTipoReporte("Producto");
         reporte.setEspecialidad("Nuevo");
-        reporte.setDescripcion("Se creó el producto " + creado.getNombre() + " (" + creado.getCodigo() + ")");
+        reporte.setDescripcion("Se creó el producto " + creado.getNombre() + " (ID: " + creado.getId() + ")");
         reporte.setFecha(LocalDateTime.now());
         reporteRepository.save(reporte);
 
@@ -66,7 +65,6 @@ public class ProductoService {
         validarCamposProducto(producto);
 
         return productoRepository.findById(id).map(existing -> {
-            existing.setCodigo(producto.getCodigo());
             existing.setNombre(producto.getNombre());
             existing.setDescripcion(producto.getDescripcion());
             existing.setPrecio(producto.getPrecio());
@@ -79,11 +77,11 @@ public class ProductoService {
 
             Producto actualizado = productoRepository.save(existing);
 
-            // Registro de historial / reporte
+            // Registro de historial / reporte (sin codigo)
             Reporte reporte = new Reporte();
             reporte.setTipoReporte("Producto");
             reporte.setEspecialidad("Editar");
-            reporte.setDescripcion("Se actualizó stock o info de " + actualizado.getNombre() + " (" + actualizado.getCodigo() + ")");
+            reporte.setDescripcion("Se actualizó stock o info de " + actualizado.getNombre() + " (ID: " + actualizado.getId() + ")");
             reporte.setFecha(LocalDateTime.now());
             reporteRepository.save(reporte);
 

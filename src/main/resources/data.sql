@@ -44,19 +44,20 @@ INSERT INTO usuarios (id, nombre, email, password, region, comuna, telefono, esa
   (3, 'Profesor Duoc', 'profesor@profesor.duoc.cl', '123456', 'Región Metropolitana de Santiago', 'San Joaquín', '+56955554444', 1, '2026-10-06 20:33:04');
 
 -- 5. PRODUCTOS
-INSERT INTO productos (id, codigo, nombre, id_categoria, id_oferta, descripcion, precio, stock, imagen) VALUES
-  (1, 'P001', 'Hamburguesa Artesanal', 1, NULL, 'Carne de res de 200g, queso cheddar fundido y tocino.', 11990, 25, 'img/hamburguesa-index.webp'),
-  (2, 'P002', 'Pizza Pepperoni Especial', 1, NULL, 'Masa madre, queso mozzarella y abundante pepperoni.', 14990, 15, 'img/pizza-pepperoni.jpg'),
-  (3, 'P003', 'Ensalada César con Pollo', 2, NULL, 'Lechuga fresca, pollo a la parrilla y aderezo césar.', 8990, 30, 'img/ceasar-index.jpg'),
-  (4, 'P004', 'Brownie con Helado', 3, NULL, 'Brownie de chocolate servido con helado de vainilla.', 5990, 20, 'img/brownie-helado.jpg'),
-  (5, 'P005', 'Batido Tropical', 4, NULL, 'Mezcla natural de mango, maracuyá y fresas.', 4290, 50, 'img/batido-tropical.jpg'),
-  (6, 'P006', 'Tacos al Pastor', 1, 1, 'Tortillas de maíz con carne adobada y piña.', 9490, 18, 'img/Tacos-Al-Pastor.jpg'),
-  (7, 'P007', 'Lasaña Bolognesa', 1, NULL, 'Capas de pasta con boloñesa y queso gratinado.', 12990, 12, 'img/lasaña-boloñesa.jpg'),
-  (8, 'P008', 'Sushi Roll California', 2, NULL, 'Rollos de cangrejo o salmon, palta, pepino y ajonjolí.', 13490, 22, 'img/sushi-index.jpg'),
-  (9, 'P009', 'Club Sándwich Doble', 1, 2, 'Pan tostado con pavo, queso y papas fritas.', 7990, 40, 'img/club-sandwich-doble.png'),
-  (10, 'P010', 'Alitas BBQ (8 Piezas)', 1, 3, 'Alitas crujientes bañadas en salsa BBQ.', 10490, 35, 'img/alitas-bbq.webp'),
-  (11, 'P011', 'Cheesecake de Frutos Rojos', 3, NULL, 'Pastel de queso cremoso con mermelada.', 5290, 15, 'img/Cheesecake de Frutos Rojos.jpg'),
-  (12, 'P012', 'Café Cappuccino Frappé', 4, NULL, 'Café licuado con hielo, leche y crema.', 3890, 60, 'img/Café Cappuccino Frappé.jpg');
+
+INSERT INTO productos (id, nombre, descripcion, precio, stock, imagen, id_categoria, id_oferta) VALUES
+  (1, 'Hamburguesa Artesanal', 'Jugosa hamburguesa de vacuno con queso cheddar, tocino y salsa especial.', 11990, 25, 'img/hamburguesa-index.webp', 1, NULL),
+  (2, 'Pizza Pepperoni Especial', 'Masa artesanal a la piedra con abundante queso mozzarella y pepperoni.', 14990, 15, 'img/pizza-pepperoni.jpg', 1, NULL),
+  (3, 'Ensalada César con Pollo', 'Mix de hojas verdes, pechuga de pollo grillada, crutones, parmesano y aderezo césar.', 8990, 30, 'img/ceasar-index.jpg', 2, NULL),
+  (4, 'Brownie con Helado', 'Brownie de chocolate tibio acompañado de helado de vainilla y salsa de manjar.', 5990, 20, 'img/brownie-helado.jpg', 3, NULL),
+  (5, 'Batido Tropical', 'Batido natural de mango, maracuyá y piña recién preparado.', 4290, 50, 'img/batido-tropical.jpg', 4, NULL),
+  (6, 'Tacos al Pastor', 'Tres tacos en tortilla de maíz con carne marinada, piña, cilantro y cebolla.', 9490, 18, 'img/Tacos-Al-Pastor.jpg', 1, 1),
+  (7, 'Lasaña Bolognesa', 'Capas de pasta fresca con salsa bolognesa casera, bechamel y queso gratinado.', 12990, 12, 'img/lasaña-boloñesa.jpg', 1, NULL),
+  (8, 'Sushi Roll California', '10 piezas rellenas de kanikama, palta y queso crema envueltas en sésamo.', 13490, 22, 'img/sushi-index.jpg', 2, NULL),
+  (9, 'Club Sándwich Doble', 'Pan de molde tostado con pollo, tocino, huevo, queso, tomate y papas fritas.', 7990, 40, 'img/club-sandwich-doble.png', 1, 2),
+  (10, 'Alitas BBQ (8 Piezas)', 'Alitas de pollo crujientes bañadas en salsa barbacoa ahumada.', 10490, 35, 'img/alitas-bbq.webp', 1, 3),
+  (11, 'Cheesecake de Frutos Rojos', 'Suave cheesecake horneado cubierto con reducción artesanal de berries.', 5290, 15, 'img/Cheesecake de Frutos Rojos.jpg', 3, NULL),
+  (12, 'Café Cappuccino Frappé', 'Café espresso batido con hielo, leche cremosa y crema chantilly.', 3890, 60, 'img/Café Cappuccino Frappé.jpg', 4, NULL);
 
 -- 6. CARRITO
 INSERT INTO carrito (id, usuario_id, producto_id, cantidad, created_at) VALUES
