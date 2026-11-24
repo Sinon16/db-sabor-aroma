@@ -1,3 +1,4 @@
+
 package com.example.db_sabor_y_aroma.service;
 
 import com.example.db_sabor_y_aroma.model.Reporte;
@@ -17,7 +18,7 @@ public class ReporteService {
     }
 
     public List<Reporte> obtenerTodos() {
-        return reporteRepository.findAll();
+        return reporteRepository.findAllByOrderByFechaDesc();
     }
 
     public Optional<Reporte> obtenerPorId(Integer id) {
