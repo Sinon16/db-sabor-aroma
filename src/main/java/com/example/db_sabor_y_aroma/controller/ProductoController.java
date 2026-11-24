@@ -71,13 +71,15 @@ public class ProductoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/productos/{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable Integer id) {
-        if (productoService.delete(id)) {
-            Map<String, String> res = new HashMap<>();
-            res.put("mensaje", "Producto eliminado correctamente");
-            return ResponseEntity.ok(res);
+        try {
+            productoService.eliminar(id);
+            return ResponseEntity.noContent().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest()
+                    .body("No se puede eliminar el producto porque está asociado a órdenes o carritos activos.");
         }
-        return ResponseEntity.notFound().build();
     }
 }
