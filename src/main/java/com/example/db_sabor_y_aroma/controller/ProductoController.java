@@ -75,7 +75,10 @@ public class ProductoController {
     @DeleteMapping("/productos/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable Integer id) {
         try {
-            productoService.eliminar(id);
+            boolean eliminado = productoService.delete(id);
+            if (!eliminado) {
+                return ResponseEntity.notFound().build();
+            }
             return ResponseEntity.noContent().build();
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
             return ResponseEntity.badRequest()
