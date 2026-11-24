@@ -72,7 +72,7 @@ public class ProductoController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/productos/{id}")
     public ResponseEntity<?> eliminarProducto(@PathVariable Integer id) {
         try {
             productoService.eliminar(id);
